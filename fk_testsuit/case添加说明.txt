@@ -1,0 +1,37 @@
+﻿test_endpage_case（翻到最后一页）：1、默认在360概览页，需要测试预警页和指标页需要自行添加点击步骤
+                                   2、变量 path=翻页控件路径，page_path=列表内容的路径,直接调用endpage方法
+	                               3、只有一页内容的企业也能正常运行，不会报错
+
+test_jryj_all_ent_case（统计所有企业今日预警数量）{需求待更改}
+
+test_jump_page_case（隔一页翻页）：1、默认在360概览页，需要测试预警页和指标页需要自行添加点击步骤
+                                   2、变量 path=翻页控件路径，page_path=列表内容的路径,直接调用jump_page方法
+	                               3、只有一页内容的企业也能正常运行，不会报错
+	                               4、在查看报告时除第一页和最后一页，同一页的内容会连续打印两遍的情况
+
+test_jumptext_case（翻页控件输入框）：1、默认在360概览页，需要测试预警页和指标页需要自行添加点击步骤
+	                                  2、path=第一页按钮的路径、text_path=文本内容所在路径、input_text=输入框所在路径、value=输入的值
+	                                  3、一共有两个方法，jumptext_change方法是翻页后能正确跳转页码，jumptext_notchange方法
+	                                  是输入值后点击go按钮不能正确翻页，还是停留在当前页，调用时选择与预期结果一致的方法
+	
+test_login_case（登陆）：1、变量username=用户名、password=密码、title=预期页面title
+
+test_loginout_case（登出）：1、loginout方法为登陆后直接退出，act_in_another_broswer方法为登陆后在另一个页面登出，
+                                再回到当前页操作（一般都使用这个方法）
+	                        2、act_in_another_broswer方法变量path=在另一个页面点击的元素路径，为方便，
+	                            变量url为登出后需要操作的页面url地址
+
+test_risk_score_case（统计风险分）：1、直接调用add_risk_score方法，变量entname为需要测试的企业名
+
+test_search_case（360搜索）：1、直接调用search，变量entname=搜索的企业名、full_name=预期结果
+	                         2、目前只支持搜索到的企业在搜索结果的第一页的情况
+	                         3、若预期结果为搜索结果为空则full_name变量填‘’（一对引号，中间没空格）
+
+test_sort_case（排序测试）：1、目前支持四个排序：对外投资列表（dwtzsort），股东背景（gdbjsort）
+                                ，变更分析（bgfxsort），股权出质（gqczsort）列表的排序测试
+	                        2、变量entname=测试企业名，直接调用对应的方法
+
+test_total_invest_case（投资总额计算）：1、直接调用add_invest方法，变量entname=测试企业名
+
+换电脑运行时需要更改run_all_case文件中的地址case_dir
+测试报告会生成在当前路径下,result.html

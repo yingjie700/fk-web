@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
+    <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
+    
+    
+<style type="text/css" media="screen">
+    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 80%; }
+    table       { font-size: 100%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 16pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+
+    a.popup_link:hover {
+        color: red;
+    }
+
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 8pt;
+        /* width: 500px;*/
+    }
+
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+
+
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+    
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+
+
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+
+
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+
+
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>测试报告</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2019-02-12 09:14:37</p>
+<p class='attribute'><strong>运行时长:</strong> 0:11:00.798544</p>
+<p class='attribute'><strong>状态:</strong> 通过 28 失败 1 错误 2</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>测试报告：</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='errorClass'>
+        <td>test_endpage_case.Search_case</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c1',3)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_endpage1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        通过</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <pre>pt1.1: 序号 成员 成员关系 关联企业
+1 孙树明 董事长 法人 3
+2 林治海 董事、总经理 1
+3 刘雪涛 董事 4
+4 孙晓燕 董事 3
+5 尚书志 董事 4
+6 李秀林 董事 3
+7 秦力 董事 3
+8 杨雄 独立董事 12
+9 汤欣 独立董事 5
+10 范立夫 独立董事 1
+--------------------------------------------
+序号 成员 成员关系 关联企业
+11 陈家乐 独立董事 1
+12 张少华 监事会主席 2
+13 程怀远 监事 1
+14 詹灵芝 监事 3
+15 谭跃 监事 6
+16 顾乃康 监事 4
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_endpage2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.2')" >
+        错误</a>
+
+    <div id='div_ft1.2' class="popup_window">
+        <pre>ft1.2: --------------------------------------------
+Traceback (most recent call last):
+  File "D:\sample1\fk_testsuit\test_endpage_case.py", line 79, in test_endpage2
+    self.endpage('//*[@id="Cpws"]/div[12]/div/a','//*[@id="Cpws"]/div[2]/a')
+  File "D:\sample1\fk_testsuit\test_endpage_case.py", line 43, in endpage
+    self.web.find_element_by_xpath(l).click() #跳到尾页
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 394, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="Cpws"]/div[12]/div/a[-2]"}
+  (Session info: chrome=71.0.3578.98)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_endpage3</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
+        通过</a>
+
+    <div id='div_pt1.3' class="popup_window">
+        <pre>pt1.3: 监控企业 预警时间 风险信号等级 状态 操作
+阿里巴巴（中国）有限公司 2019-02-12 01:03:35 开庭公告 近期开庭
+未识别
+深圳开维教育信息技术股份有限公司 2019-02-12 01:03:01 已退出经营 “注销”
+未识别
+海城市石油机械制造有限公司 2019-02-12 01:02:57 投资风险
+未识别
+智融时代信息技术有限公司 2019-02-12 01:02:37 股权质押
+未识别
+惠州明辉投资发展有限公司 2019-02-12 01:02:33 大量股权质押
+未识别
+惠州明辉投资发展有限公司 2019-02-12 01:02:33 股权质押 大量股权质押
+未识别
+惠州明辉投资发展有限公司 2019-02-12 01:02:33 股权质押
+未识别
+合肥大唐置业有限公司 2019-02-12 01:01:49 开庭公告 近期开庭
+未识别
+合肥大唐置业有限公司 2019-02-12 01:01:49 开庭公告 近期开庭
+未识别
+合肥大唐置业有限公司 2019-02-12 01:01:49 开庭公告 近期开庭
+未识别
+--------------------------------------------
+监控企业 预警时间 风险信号等级 状态 操作
+赤峰富龙热力有限责任公司 2019-01-17 15:52:25
+未识别
+赤峰富龙热力有限责任公司 2019-01-17 15:52:25
+未识别
+赤峰富龙热力有限责任公司 2019-01-17 15:52:25
+未识别
+赤峰富龙热力有限责任公司 2019-01-17 15:52:25
+未识别
+湖南新华供电有限公司 2019-01-17 15:52:25 开庭公告
+已识别
+重庆对外建设（集团）有限公司 2019-01-17 15:52:25 开庭公告
+已识别
+重庆对外建设（集团）有限公司 2019-01-17 15:52:25 被执行
+已识别
+重庆对外建设（集团）有限公司 2019-01-17 15:52:25 开庭公告
+未识别
+重庆对外建设（集团）有限公司 2019-01-17 15:52:25 被执行
+未识别
+浙江浙大网新集团有限公司 2019-01-17 15:52:25 投资风险
+未识别
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_jryj_all_ent_case.Yjjk_num</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c2',1)">详情</a></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_num</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        通过</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <pre>pt2.1: 2
+16
+18
+18
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_jump_page_case.Jump_page_case</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c3',2)">详情</a></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_jump_page1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        通过</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <pre>pt3.1: 开始测试test_jump_page
+2019官网购票商务舱，直升贵宾会员拉开序幕
+2019-02-12原文链接
+购买高价值商务舱可特惠升级至金鹏金卡/银卡！购买并实际搭乘海航加拿大到中国公务舱C、D舱单程一次，即可升级金鹏俱乐部金卡会员。特殊升级活动每位会员仅可享受一次，以实际购买并最先搭乘的航班为准，将于航班...
+一篇玩转：中国银行，一家送分的银行
+2019-02-11原文链接
+一篇玩转：中国银行，一家送分的银行中国银行，收益可以说居四大行之首，活动十分霸气，低额度实现高收益，境外活动活动常年不断，送分活动一波又一波，京东满减力度全宇宙最大，中国银行卡种搭配很有技巧，主要是境...
+中国民航首条跨国国内航线诞生
+2019-02-11原文链接
+中国民航首条跨国国内航线诞生2016年2月11日(农历正月初四)，中国民航首条跨国国内航线诞生。京华时报讯内蒙古满洲里西郊机场2016年2月11日对外发布消息称，日前海南航空一架波音737-800型飞...
+CCAR-121部航空运营人信息一览
+2019-02-11原文链接
+CCAR-121部航空运营人信息一览CCAR-121大型飞机公共航空运输承运人运行合格审定规则适用于：使用最大起飞全重超过5700千克的多发飞机实施的定期载客运输飞行.列表如下：中国东方航空。
+对不起 ，因为机长心情不好，您的航班被取消了...
+2019-02-11原文链接
+对不起，因为机长心情不好，您的航班被取消了...事情大概是这样的： 2月10日，原计划当晚23:30从南京起飞，前往马来西亚吉隆坡的MH533航班，由于机长登机后不慎摔倒，造成手臂受伤，无法继续执行飞...
+盘点中国顶尖富豪中的佛教徒 影坛大腕上榜
+2019-02-11原文链接
+佛教是一个引人向善、教人思考、为人树立信仰的一个教派。1991年，刘长乐成立“乐天公司”（凤凰前身）之初，就与当时健在的中国佛教协会会长赵朴初先生合作建立了“中国佛教文化数据库”，用现代数码科技储存佛...
+适合自己的信用卡才是最好的（交行篇）
+2019-02-11原文链接
+适合自己的信用卡才是最好的（交行篇）交行值得申请的信用卡，有以下几张：白麒麟。每年6次交通银行沃德财富境内机场贵宾室服务和6次龙腾出行全球机场贵宾室服务，一主卡三副卡均独立计算。需要充分把握这些优惠活...
+坐飞机心机小Tips
+2019-02-11原文链接
+即将开学的你订好机票了吗？飞机不等人，机票上写着几点飞，实际国内提前半小时停止办理登机手续，国际提前一小时停止办理，提前十五分钟飞机舱门就关闭了。如果买的廉价航空，行李额是不包含的，你可以拎小包小箱子...
+为什么要出国留学？50条意义，哪一条戳中了你？
+2019-02-11原文链接
+为什么要出国留学？走进韩国超一流大学-韩国龙仁大学！
+【春节特辑】澳大利亚+新西兰之旅
+2019-02-11原文链接
+★主题乐园梦幻世界（夏季特别安排）澳大利亚最受欢迎的主题乐园，南半球最大的主题乐园.在这里，拥有至少一百只以上的野生海豚常年栖息在杰维斯湾中，这里是观海豚的最理想地点，时而见海豚露出背鳍和大家打招呼，...
+-----------------------------------------------
+【海航地勤】海南航空地面服务人员招聘简章#高待遇#直签#
+2019-02-11原文链接
+年龄在20-28周岁之间,男女不限，具有大专及以上学历。掌握航班动态信息和飞机座位布局,按要求办理旅客乘机手续（包括行李托运手续）。做好不正常航班情况下旅客的改签、退票及退还旅客交运行李工作。核对旅客...
+中信明明：中国会走上QE之路吗？
+2019-02-11原文链接
+在货币政策传导不畅、信用收缩持续的背景下，不少观点认为央行将开启量化宽松，我们认为央行目前不会走上量化宽松的道路。在价格工具仍然有效的前提下，央行更倾向于使用结构化（定向降准、置换MLF等）、价格工具...
+春节出游，要提前多久到机场才能保证不误机？
+2019-02-10原文链接
+春节出游，要提前多久到机场才能保证不误机？机场通知办理手续也会提前，机场客流量人山人海将越来越严重！还有一种特殊情况是，已知的交通管控、道路施工等，总之，会影响到你去机场的路程时间，还有那些自己开车去...
+[首发线路]极美全球.贝加尔湖蓝冰奇缘，奔赴一场冰雪盛宴第三期
+2019-02-10原文链接
+极美全球.贝加尔湖蓝冰奇缘,奔赴一场冰雪盛宴第三期。安加拉河（贝加尔湖300多条支流唯一的流出河）贯穿市区，有大桥连通在贝加尔湖的东南端。李斯特维扬卡是俄罗斯贝加尔湖边的一个小镇，在伊尔库茨克70多公...
+18-19年中瑞实习就业基地：学喜欢的专业，找喜欢的工作
+2019-02-10原文链接
+北京第二外国语学院中瑞酒店管理学院是经教育部批准、计划内招生、国家承认学历的四年制本科大学。学院于2008年成立，始终专注于酒店及高端服务业高级管理人才的培养。阿拉伯塔酒店（帆船酒店）。18-19年中...
+如何跟着主力吃肉？巧用3大特征轻松辨别护盘股
+2019-02-10原文链接
+如何跟着主力吃肉？巧用3大特征轻松辨别护盘股在大盘下跌时最能体现出个股的强弱，投资者从盘面中观察有无主力护盘动作，从而可判断出主力有无弃庄企图。有些个股在大盘下跌时犹如被人遗弃的孤儿，一泄千里，在重要...
+两组经典实效的K线形态，记下来，辨买卖
+2019-02-10原文链接
+早晨之星与黄昏之星虽然都是一根阳线，一根阴线以及一根十字星线构成，但所表现的含义却是完全相反的。在股价上涨过程中，首先出现一根中阳线或大阳线a，表示多方占主动，正在推动股价上涨，紧跟阳线a之后，出现一...
+曼彻斯特比足球更火热的是房产市场，租金回报比伦敦高67％！
+2019-02-10原文链接
+曼彻斯特比足球更火热的是房产市场，租金回报比伦敦高67％！2017年，曼彻斯特中心区域的平均房价为208000英镑，每套价格较伦敦相比，便宜近140万英镑，投资者亦可省去146000英镑以上的印花税。...
+中国快线4008114114 品牌专线电话通讯录
+2019-02-10原文链接
+中国快线是专门为中国品牌企业打造的全国唯一的、强大的中文品牌连接专线，只要拨打中国电信权威号码4008114114，直呼注册的品牌名称，即可快速与其通话。中国快线4008114114品牌专线电话通讯录...
+墨尔本西南区Point Cook区域介绍
+2019-02-10原文链接
+库克角占地大约37平方公里，在墨尔本CBD的西南面，有25公里的距离，它位于Wyndham（温德姆）市南面，紧贴飞利浦海湾的西海岸， M1免费高速公路贯穿整个库克角，是通往墨尔本CBD的主要路线。Po...
+-------------------------------------------------
+【海航地勤】海南航空地面服务人员招聘简章#高待遇#直签#
+2019-02-11原文链接
+年龄在20-28周岁之间,男女不限，具有大专及以上学历。掌握航班动态信息和飞机座位布局,按要求办理旅客乘机手续（包括行李托运手续）。做好不正常航班情况下旅客的改签、退票及退还旅客交运行李工作。核对旅客...
+中信明明：中国会走上QE之路吗？
+2019-02-11原文链接
+在货币政策传导不畅、信用收缩持续的背景下，不少观点认为央行将开启量化宽松，我们认为央行目前不会走上量化宽松的道路。在价格工具仍然有效的前提下，央行更倾向于使用结构化（定向降准、置换MLF等）、价格工具...
+春节出游，要提前多久到机场才能保证不误机？
+2019-02-10原文链接
+春节出游，要提前多久到机场才能保证不误机？机场通知办理手续也会提前，机场客流量人山人海将越来越严重！还有一种特殊情况是，已知的交通管控、道路施工等，总之，会影响到你去机场的路程时间，还有那些自己开车去...
+[首发线路]极美全球.贝加尔湖蓝冰奇缘，奔赴一场冰雪盛宴第三期
+2019-02-10原文链接
+极美全球.贝加尔湖蓝冰奇缘,奔赴一场冰雪盛宴第三期。安加拉河（贝加尔湖300多条支流唯一的流出河）贯穿市区，有大桥连通在贝加尔湖的东南端。李斯特维扬卡是俄罗斯贝加尔湖边的一个小镇，在伊尔库茨克70多公...
+18-19年中瑞实习就业基地：学喜欢的专业，找喜欢的工作
+2019-02-10原文链接
+北京第二外国语学院中瑞酒店管理学院是经教育部批准、计划内招生、国家承认学历的四年制本科大学。学院于2008年成立，始终专注于酒店及高端服务业高级管理人才的培养。阿拉伯塔酒店（帆船酒店）。18-19年中...
+如何跟着主力吃肉？巧用3大特征轻松辨别护盘股
+2019-02-10原文链接
+如何跟着主力吃肉？巧用3大特征轻松辨别护盘股在大盘下跌时最能体现出个股的强弱，投资者从盘面中观察有无主力护盘动作，从而可判断出主力有无弃庄企图。有些个股在大盘下跌时犹如被人遗弃的孤儿，一泄千里，在重要...
+两组经典实效的K线形态，记下来，辨买卖
+2019-02-10原文链接
+早晨之星与黄昏之星虽然都是一根阳线，一根阴线以及一根十字星线构成，但所表现的含义却是完全相反的。在股价上涨过程中，首先出现一根中阳线或大阳线a，表示多方占主动，正在推动股价上涨，紧跟阳线a之后，出现一...
+曼彻斯特比足球更火热的是房产市场，租金回报比伦敦高67％！
+2019-02-10原文链接
+曼彻斯特比足球更火热的是房产市场，租金回报比伦敦高67％！2017年，曼彻斯特中心区域的平均房价为208000英镑，每套价格较伦敦相比，便宜近140万英镑，投资者亦可省去146000英镑以上的印花税。...
+中国快线4008114114 品牌专线电话通讯录
+2019-02-10原文链接
+中国快线是专门为中国品牌企业打造的全国唯一的、强大的中文品牌连接专线，只要拨打中国电信权威号码4008114114，直呼注册的品牌名称，即可快速与其通话。中国快线4008114114品牌专线电话通讯录...
+墨尔本西南区Point Cook区域介绍
+2019-02-10原文链接
+库克角占地大约37平方公里，在墨尔本CBD的西南面，有25公里的距离，它位于Wyndham（温德姆）市南面，紧贴飞利浦海湾的西海岸， M1免费高速公路贯穿整个库克角，是通往墨尔本CBD的主要路线。Po...
+-----------------------------------------------
+【自由巴黎】德法意瑞四国11日游
+2019-02-09原文链接
+导致游客被扣款、无法退钱、退税金额有所出入等情况，旅行社和导游仅能协助游客积极处理，并不能承担游客的损失，请游客予以理解。欧洲使馆规定，凡在旅行社参团办理团队签证的游客须在回国抵达首都机场时将护照、全...
+【党旗飘扬 党员先锋人物春运系列报道】暖冬行动 海南航空青年文明号用爱温暖春运回家路
+2019-02-09原文链接
+暖冬行动海南航空青年文明号用爱温暖春运回家路点击上方蓝色字体,关注我们。新春佳节，万家灯火团圆时，海航党员默默地坚守岗位，把笑容和温暖带给了每一位素不相识的人，向五湖四海的旅客和千千万万个家庭传递着温...
+上海这些东西统统免费，每一个都与你息息相关!
+2019-02-09原文链接
+上海这些东西统统免费，每一个都与你息息相关!
+宠物能不能上飞机？情感抚慰犬进机舱暴露新问题
+2019-02-09原文链接
+宠物能不能上飞机？此前的媒体报道中，南航其他航班搭载的情感抚慰犬多为可卡犬等小型犬类，因此，如阿拉斯加这样的大型犬到底是不是情感抚慰犬，还需拿出更有力的证据。这类信息暴露出一个不容忽视的问题，那就是我...
+去野 | 未被开垦的卢旺达（一）
+2019-02-08原文链接
+未被开垦的卢旺达。此行是受邀来访卢旺达，两辆可以Safari的越野车已在机场外蓝天白云下候着，兴奋的把行李和自己一股脑儿塞进车里，由此便拉开了第一次初访卢旺达的篇章。而我们这次还有个任务是了解卢旺达整...
+注意啦，注意啦！2019年3月《全国礼仪师资培训（使用技能）班》 招生简章
+2019-02-08原文链接
+2019年3月《全国礼仪师资培训（使用技能）班》招生简章2019年3月《全国礼仪师资培训（使用技能）班》.商务礼仪、政务礼仪、服务礼仪、社交礼仪在企事业单位中的实际应用梳理。曾被深圳MK健身会所南昌分...
+【学联活动】2019“曼漫征途 星火燎城”曼彻斯特华人春晚回顾
+2019-02-08原文链接
+2019“曼漫征途星火燎城”曼彻斯特华人春晚回顾满载着青春与梦想,团圆和温暖的列车正在运行――.我们邀请了中华人民共和国驻曼彻斯特总领事郑曦原先生、曼彻斯特市市长黑臣女士、奥尔德姆市市长伊克巴尔先生及...
+春节不打烊 | 新兴候机楼空港快线发班时刻请查收
+2019-02-08原文链接
+翠芬、春花、铁蛋、富贵儿.......这台机器支持乘坐东方航空、上海航空、中国联合航空、中国国际航空、山东航空、深圳航空、昆明航空、奥凯航空、成都航空、吉祥航空、海南航空、首都航空、西部航空、天津航空...
+手绘飞机 | 绝对惊艳！船新版本的手绘飞机来了~
+2019-02-08原文链接
+手绘飞机|绝对惊艳！船新版本的手绘飞机来了~还记得上次发的两篇超级逼真的手绘飞机作品么？2019新年来临之际，这位作者又发来了一些令人眼前一亮的新作，让我们共同欣赏~.海南航空737MAX8客机，降落...
+美西全景61黄石公园61海景列车6113日游
+2019-02-08原文链接
+游3大国家公园【黄石国家公园+大提顿国家公园+布莱斯国家公园】， 【超值自选】三大摄影胜地【羚羊彩穴，马蹄湾，科罗拉多大峡谷】， 5大名城、乘Pacific号海景火车、观“中途岛”号航空母舰、传奇66...
+-------------------------------------------------
+【自由巴黎】德法意瑞四国11日游
+2019-02-09原文链接
+导致游客被扣款、无法退钱、退税金额有所出入等情况，旅行社和导游仅能协助游客积极处理，并不能承担游客的损失，请游客予以理解。欧洲使馆规定，凡在旅行社参团办理团队签证的游客须在回国抵达首都机场时将护照、全...
+【党旗飘扬 党员先锋人物春运系列报道】暖冬行动 海南航空青年文明号用爱温暖春运回家路
+2019-02-09原文链接
+暖冬行动海南航空青年文明号用爱温暖春运回家路点击上方蓝色字体,关注我们。新春佳节，万家灯火团圆时，海航党员默默地坚守岗位，把笑容和温暖带给了每一位素不相识的人，向五湖四海的旅客和千千万万个家庭传递着温...
+上海这些东西统统免费，每一个都与你息息相关!
+2019-02-09原文链接
+上海这些东西统统免费，每一个都与你息息相关!
+宠物能不能上飞机？情感抚慰犬进机舱暴露新问题
+2019-02-09原文链接
+宠物能不能上飞机？此前的媒体报道中，南航其他航班搭载的情感抚慰犬多为可卡犬等小型犬类，因此，如阿拉斯加这样的大型犬到底是不是情感抚慰犬，还需拿出更有力的证据。这类信息暴露出一个不容忽视的问题，那就是我...
+去野 | 未被开垦的卢旺达（一）
+2019-02-08原文链接
+未被开垦的卢旺达。此行是受邀来访卢旺达，两辆可以Safari的越野车已在机场外蓝天白云下候着，兴奋的把行李和自己一股脑儿塞进车里，由此便拉开了第一次初访卢旺达的篇章。而我们这次还有个任务是了解卢旺达整...
+注意啦，注意啦！2019年3月《全国礼仪师资培训（使用技能）班》 招生简章
+2019-02-08原文链接
+2019年3月《全国礼仪师资培训（使用技能）班》招生简章2019年3月《全国礼仪师资培训（使用技能）班》.商务礼仪、政务礼仪、服务礼仪、社交礼仪在企事业单位中的实际应用梳理。曾被深圳MK健身会所南昌分...
+【学联活动】2019“曼漫征途 星火燎城”曼彻斯特华人春晚回顾
+2019-02-08原文链接
+2019“曼漫征途星火燎城”曼彻斯特华人春晚回顾满载着青春与梦想,团圆和温暖的列车正在运行――.我们邀请了中华人民共和国驻曼彻斯特总领事郑曦原先生、曼彻斯特市市长黑臣女士、奥尔德姆市市长伊克巴尔先生及...
+春节不打烊 | 新兴候机楼空港快线发班时刻请查收
+2019-02-08原文链接
+翠芬、春花、铁蛋、富贵儿.......这台机器支持乘坐东方航空、上海航空、中国联合航空、中国国际航空、山东航空、深圳航空、昆明航空、奥凯航空、成都航空、吉祥航空、海南航空、首都航空、西部航空、天津航空...
+手绘飞机 | 绝对惊艳！船新版本的手绘飞机来了~
+2019-02-08原文链接
+手绘飞机|绝对惊艳！船新版本的手绘飞机来了~还记得上次发的两篇超级逼真的手绘飞机作品么？2019新年来临之际，这位作者又发来了一些令人眼前一亮的新作，让我们共同欣赏~.海南航空737MAX8客机，降落...
+美西全景61黄石公园61海景列车6113日游
+2019-02-08原文链接
+游3大国家公园【黄石国家公园+大提顿国家公园+布莱斯国家公园】， 【超值自选】三大摄影胜地【羚羊彩穴，马蹄湾，科罗拉多大峡谷】， 5大名城、乘Pacific号海景火车、观“中途岛”号航空母舰、传奇66...
+-----------------------------------------------
+各部门守护春运“回家路”
+2019-02-07原文链接
+各部门守护春运“回家路”各部门守护春运“回家路”。中国铁路北京局集团公司在京沪高铁部分列车上试点开展“扫码点餐”服务，旅客动动手指即可送餐到手。广州局集团公司在长株潭城际铁路推出“铁路e卡通”扫码乘车...
+快看！最全春节重庆直飞旅游航线！
+2019-02-06原文链接
+最全春节重庆直飞旅游航线！点击上方“最爱重庆”加关注哟↑↑↑。在有诗意的生活之后，我们有了对远方的渴求，相信每个朋友在旅行的路程上都受过转机、等待的耗费，截止2018年，重庆有哪些直飞的航线呢，今天小...
+二月除了过年，深圳还有这些大事你们要知道，尤其是在深圳过年的人！
+2019-02-06原文链接
+二月除了过年，深圳还有这些大事你们要知道，尤其是在深圳过年的人！春节期间，弘法寺将提供免费香火，并实行统一集中燃香，禁止信众自带香烛，市民进入寺庙领取香火后，不得在寺内活动途中自行燃香，统一在离开弘法...
+智慧女性“朝阳职业”，转型做国际礼仪培训师
+2019-02-06原文链接
+智慧女性“朝阳职业”，转型做国际礼仪培训师2019年中国74上海《ACI国际注册高级礼仪培训师认证班》。3、国际化礼仪标准10年来孵化4000多名国际礼仪导师最系统：系统化课体系易懂，易复制： 1、国...
+2019第六届海外春晚在索尼大剧院成功举办-精彩照片PART 1
+2019-02-06原文链接
+二月四号，在多伦多Sony大剧院， 8点整，随着《我家在中国》恢宏音乐声，大幕徐徐拉开。本场晚会收到了加国总理特鲁多，安省省长福特，多伦多市长庄德利及众多国会议员，省议员及市议员发来的贺信，三级政要给...
+春节度假精选！包租5年+7%年回报率！三面环海的家，就在普吉岛水星之城公寓！
+2019-02-06原文链接
+三面环海的家，就在普吉岛水星之城公寓！VIP THAILAND普吉岛精工之作―-迈卡芮公寓，占地16800 O，由9栋的高品质酒店式公寓与1栋多功能大堂（五星级奢华酒店大堂）构成。迈卡芮公寓，距离拉威...
+大年初二，各大航空公司空姐给您拜年啦！
+2019-02-06原文链接
+大年初二，各大航空公司空姐给您拜年啦！
+【海南航空 | 新年礼包 体验公务舱趁现在+$600即可w】
+2019-02-06原文链接
+【海南航空|新年礼包体验公务舱趁现在+$600即可w】.查询行程｜订票｜攻略｜。PanasiaHolidays 亚旅游提供多种语言服务包括国语,广东话,英语,福建话,我们很乐意回答您的任何问题,请马上...
+东方の马尔代夫――越南芽庄！062750 广州直飞，品尝越式美食，出海度假休闲5天之旅
+2019-02-06原文链接
+东方の马尔代夫――越南芽庄！06 2750广州直飞，品尝越式美食，出海度假休闲5天之旅.这里拥有全越南最好的海滩，绵延数公里，也是越南最适合潜水的旅游目的地。除此之外，还有全东南亚最便宜的新鲜龙虾，实...
+承包你的假期|迎新春、购好礼，春节机上优惠活动都在这里
+2019-02-06原文链接
+承包你的假期|迎新春、购好礼，春节机上优惠活动都在这里今年春节。经典双心相扣设计，选用施华洛世奇官方授权水晶，施华洛世奇专利工艺让水晶拥有钻石一样的光彩。独特设计的花瓣钥匙造型，叩开你的心扉， “打开...
+-------------------------------------------------
+各部门守护春运“回家路”
+2019-02-07原文链接
+各部门守护春运“回家路”各部门守护春运“回家路”。中国铁路北京局集团公司在京沪高铁部分列车上试点开展“扫码点餐”服务，旅客动动手指即可送餐到手。广州局集团公司在长株潭城际铁路推出“铁路e卡通”扫码乘车...
+快看！最全春节重庆直飞旅游航线！
+2019-02-06原文链接
+最全春节重庆直飞旅游航线！点击上方“最爱重庆”加关注哟↑↑↑。在有诗意的生活之后，我们有了对远方的渴求，相信每个朋友在旅行的路程上都受过转机、等待的耗费，截止2018年，重庆有哪些直飞的航线呢，今天小...
+二月除了过年，深圳还有这些大事你们要知道，尤其是在深圳过年的人！
+2019-02-06原文链接
+二月除了过年，深圳还有这些大事你们要知道，尤其是在深圳过年的人！春节期间，弘法寺将提供免费香火，并实行统一集中燃香，禁止信众自带香烛，市民进入寺庙领取香火后，不得在寺内活动途中自行燃香，统一在离开弘法...
+智慧女性“朝阳职业”，转型做国际礼仪培训师
+2019-02-06原文链接
+智慧女性“朝阳职业”，转型做国际礼仪培训师2019年中国74上海《ACI国际注册高级礼仪培训师认证班》。3、国际化礼仪标准10年来孵化4000多名国际礼仪导师最系统：系统化课体系易懂，易复制： 1、国...
+2019第六届海外春晚在索尼大剧院成功举办-精彩照片PART 1
+2019-02-06原文链接
+二月四号，在多伦多Sony大剧院， 8点整，随着《我家在中国》恢宏音乐声，大幕徐徐拉开。本场晚会收到了加国总理特鲁多，安省省长福特，多伦多市长庄德利及众多国会议员，省议员及市议员发来的贺信，三级政要给...
+春节度假精选！包租5年+7%年回报率！三面环海的家，就在普吉岛水星之城公寓！
+2019-02-06原文链接
+三面环海的家，就在普吉岛水星之城公寓！VIP THAILAND普吉岛精工之作―-迈卡芮公寓，占地16800 O，由9栋的高品质酒店式公寓与1栋多功能大堂（五星级奢华酒店大堂）构成。迈卡芮公寓，距离拉威...
+大年初二，各大航空公司空姐给您拜年啦！
+2019-02-06原文链接
+大年初二，各大航空公司空姐给您拜年啦！
+【海南航空 | 新年礼包 体验公务舱趁现在+$600即可w】
+2019-02-06原文链接
+【海南航空|新年礼包体验公务舱趁现在+$600即可w】.查询行程｜订票｜攻略｜。PanasiaHolidays 亚旅游提供多种语言服务包括国语,广东话,英语,福建话,我们很乐意回答您的任何问题,请马上...
+东方の马尔代夫――越南芽庄！062750 广州直飞，品尝越式美食，出海度假休闲5天之旅
+2019-02-06原文链接
+东方の马尔代夫――越南芽庄！06 2750广州直飞，品尝越式美食，出海度假休闲5天之旅.这里拥有全越南最好的海滩，绵延数公里，也是越南最适合潜水的旅游目的地。除此之外，还有全东南亚最便宜的新鲜龙虾，实...
+承包你的假期|迎新春、购好礼，春节机上优惠活动都在这里
+2019-02-06原文链接
+承包你的假期|迎新春、购好礼，春节机上优惠活动都在这里今年春节。经典双心相扣设计，选用施华洛世奇官方授权水晶，施华洛世奇专利工艺让水晶拥有钻石一样的光彩。独特设计的花瓣钥匙造型，叩开你的心扉， “打开...
+-----------------------------------------------
+乘坐海航HU741航班从深圳直飞苏黎世（2018.12.19）
+2019-02-06原文链接
+乘坐海航HU741航班从深圳直飞苏黎世（2018.12.19）。在深圳宝安机场办理登机手续: 2018年12月18日15:55赶到深圳宝安机场航站楼四楼候机大厅，距飞机起飞时间还有八个多小时，在候机大...
+新西兰最浓年味在这里！送$10000纽币大锦鲤+88条神秘小锦鲤，还有~
+2019-02-06原文链接
+新西兰最浓年味在这里！送$10000纽币大锦鲤+88条神秘小锦鲤，还有~。中国人过年图的就是喜庆热闹，作为新西兰名胜，奥克兰地标， Sky Tower天空塔的庆典活动，自然也成为了每年春节小伙伴们必看...
+除夕夜，加拿大华人年夜饭刷屏朋友圈，一家比一家豪！
+2019-02-06原文链接
+除夕夜，加拿大华人年夜饭刷屏朋友圈，一家比一家豪！年三十儿，无论相隔多远，工作多忙，人们都希望回到家中，吃一顿团团圆圆的年夜饭。多伦多版的年夜饭更是土豪到不行，天南海北各式各样的美味轮番轰击小编的味蕾...
+日本航空巨头取消中国航班，声称利润太低，民航局：我让没利润！
+2019-02-05原文链接
+日本航空巨头取消中国航班，声称利润太低，民航局：我让没利润！每天都有分享，完全是免费订阅，请放心关注要说近期世界上最受瞩目的大合作，当属中方未来20年的航空项目，我国对外宣称投入6万亿向全世界招标，也...
+带着荣誉回家！立功官兵免费升舱便捷出行
+2019-02-05原文链接
+带着荣誉回家！春运前夕，桂林联勤保障中心某调度中心协调地方交通运输部门在海南省广泛开展“军人出行依法优先服务月”活动，推出为立功官兵免费升舱等惠军服务暖心举措。“为立功官兵免费升舱，不仅提升军人荣誉感...
+图片 党旗飘扬 海航举行新年迎送航班系列慰问活动_民航新闻_民航资源网
+2019-02-05原文链接
+:爆竹声中一岁除,春风送暖入屠苏。2019年我们将继续传承海航文化、弘扬海航精神，凝心聚力谋发展、蓄力扬帆再起航。海南航空团委也积极行动，号召全体团员及春运志愿者履行“诚信为本、有诺必践、恪尽职守、率...
+2019申卡指南之 18行最值得办的免年费白金信用卡
+2019-02-05原文链接
+2019申卡指南之18行最值得办的免年费白金信用卡大年初一，祝愿大家诸事大吉，诸事顺利！
+新年快乐，感恩有你！
+2019-02-05原文链接
+新年快乐，感恩有你！点击上方关注“从化城市候机楼”。从化候机楼位于环市东路156号振誉大厦首层，正是105国道和106国道交汇处，离街北、大广、距增从高速仅1公里，地铁口约800米，汽车总站仅600米...
+最美“敬业福”，致春节坚守岗位的海南人
+2019-02-05原文链接
+我们总说“回家过年”。海口出租车司机张师傅已经3年没能和家人一起吃顿年夜饭了，今年春节，他依旧坚守岗位。春运、假期是他们最繁忙的时候，我们奔波在回家、外出游玩的路上，他们坚守岗位，放弃和亲人团聚的机会...
+冯正霖局长新春慰问海航一线员工
+2019-02-05原文链接
+:大年初一,处处洋溢着喜庆祥和的新年气象。中国民航局局长冯正霖、华北地区管理局局长辛天河在北京慰问海南航空春运一线员工，高度肯定了海南航空过去一年的成绩，并代表民航局向广大一线员工致以节日的问候。殷切...
+-------------------------------------------------
+完成测试test_jump_page
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_jump_page2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        通过</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <pre>pt3.2: 开始测试test_jump_page
+完成测试test_jump_page
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_jumptext_case.Jumptext_case</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c4',2)">详情</a></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_jumtext1</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_jumtext2</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_login_case.Login_case</td>
+        <td>5</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c5',5)">详情</a></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_pwd_error</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_pwd_null</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_user_error</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_user_null</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_loginz_success</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_logout_case.Logout_case</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c6',3)">详情</a></td>
+    </tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_logout0</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        通过</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <pre>pt6.1: 开始测试test_loginout
+完成测试test_loginout
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_logout1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.2')" >
+        通过</a>
+
+    <div id='div_pt6.2' class="popup_window">
+        <pre>pt6.2: 开始测试test_loginout
+完成测试test_loginout
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_logout2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.3')" >
+        通过</a>
+
+    <div id='div_pt6.3' class="popup_window">
+        <pre>pt6.3: 开始测试test_loginout
+完成测试test_loginout
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>test_riskscore_case.Risks_Score</td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c7',4)">详情</a></td>
+    </tr>
+
+<tr id='ft7.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_riskscore</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.1')" >
+        错误</a>
+
+    <div id='div_ft7.1' class="popup_window">
+        <pre>ft7.1: only one self_risk_page
+only one self_risk_page1
+0
+Traceback (most recent call last):
+  File "D:\sample1\fk_testsuit\test_riskscore_case.py", line 145, in test_riskscore
+    self.add_risk_score('广东中磊投资集团有限公司')
+  File "D:\sample1\fk_testsuit\test_riskscore_case.py", line 82, in add_risk_score
+    self.web.find_element_by_xpath("//div[@id='xhxq']/div/ul/li[2]").click()
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 394, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\python3.6.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@id='xhxq']/div/ul/li[2]"}
+  (Session info: chrome=71.0.3578.98)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_riskscore1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.2')" >
+        通过</a>
+
+    <div id='div_pt7.2' class="popup_window">
+        <pre>pt7.2: 3
+2913
+only one related_risk_page1
+only one page2
+96
+999
+999
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_riskscore2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.3')" >
+        通过</a>
+
+    <div id='div_pt7.3' class="popup_window">
+        <pre>pt7.3: 10
+9781
+only one related_risk_page1
+only one page2
+220
+999
+999
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_riskscore3</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.4')" >
+        通过</a>
+
+    <div id='div_pt7.4' class="popup_window">
+        <pre>pt7.4: only one self_risk_page
+only one self_risk_page1
+105
+only one related_risk_page1
+only one page2
+145
+250
+250
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_search_case.Search_case</td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c8',4)">详情</a></td>
+    </tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_search0</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.1')" >
+        通过</a>
+
+    <div id='div_pt8.1' class="popup_window">
+        <pre>pt8.1: no such ent
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_search1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.2')" >
+        通过</a>
+
+    <div id='div_pt8.2' class="popup_window">
+        <pre>pt8.2: no such ent
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_search2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.3')" >
+        通过</a>
+
+    <div id='div_pt8.3' class="popup_window">
+        <pre>pt8.3: no such ent
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_search3</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.4')" >
+        通过</a>
+
+    <div id='div_pt8.4' class="popup_window">
+        <pre>pt8.4: no such ent
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td>test_sort_case.Search_case</td>
+        <td>5</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c9',5)">详情</a></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_sort1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.1')" >
+        通过</a>
+
+    <div id='div_pt9.1' class="popup_window">
+        <pre>pt9.1: [20180529, 20170711, 20170711, 20160422, 20130609, 20130108, 20130108, 20121025, 20121025, 20121025]
+[20180529, 20170711, 20170711, 20160422, 20130609, 20130108, 20130108, 20121025, 20121025, 20121025]
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft9.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_sort2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft9.2')" >
+        失败</a>
+
+    <div id='div_ft9.2' class="popup_window">
+        <pre>ft9.2: [0, 20180514, 0, 0, 0, 0, 0, 0, 0]
+[20180514, 0, 0, 0, 0, 0, 0, 0, 0]
+Traceback (most recent call last):
+  File "D:\sample1\fk_testsuit\test_sort_case.py", line 120, in test_sort2
+    self.gqczsort('广发证券股份有限公司')
+  File "D:\sample1\fk_testsuit\test_sort_case.py", line 114, in gqczsort
+    self.assertListEqual(after, b)
+AssertionError: Lists differ: [20180514, 0, 0, 0, 0, 0, 0, 0, 0] != [0, 20180514, 0, 0, 0, 0, 0, 0, 0]
+
+First differing element 0:
+20180514
+0
+
+- [20180514, 0, 0, 0, 0, 0, 0, 0, 0]
+?                              ---
+
++ [0, 20180514, 0, 0, 0, 0, 0, 0, 0]
+?  +++
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_sort3</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.3')" >
+        通过</a>
+
+    <div id='div_pt9.3' class="popup_window">
+        <pre>pt9.3: [74.07, 2.06, 2.06, 2.06, 1.23, 0.82]
+[74.07, 2.06, 2.06, 2.06, 1.23, 0.82]
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt9.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_sort4</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.4')" >
+        通过</a>
+
+    <div id='div_pt9.4' class="popup_window">
+        <pre>pt9.4: []
+[]
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt9.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_sort5</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.5')" >
+        通过</a>
+
+    <div id='div_pt9.5' class="popup_window">
+        <pre>pt9.5: [100.0, 100.0, 100.0, 100.0, 51.13, 50.0, 32.5, 25.0, 12.83, 12.02]
+[100.0, 100.0, 100.0, 100.0, 51.13, 50.0, 32.5, 25.0, 12.83, 12.02]
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>test_total_invest_case.Total_invest</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c10',2)">详情</a></td>
+    </tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_invest1</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.1')" >
+        通过</a>
+
+    <div id='div_pt10.1' class="popup_window">
+        <pre>pt10.1: []
+3
+50000.00 万 人民币
+50000.00 万 人民币
+150000.00 万 人民币
+7800.00 万 人民币
+8600.00 万 人民币
+10372.50 万 
+4500.00 万 人民币
+2000.00 万 人民币
+68970.00 万 
+25.00 万 人民币
+352267.5
+&lt;class 'float'&gt;
+--  
+--  
+--  
+352267.5
+&lt;class 'float'&gt;
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_invest2</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.2')" >
+        通过</a>
+
+    <div id='div_pt10.2' class="popup_window">
+        <pre>pt10.2: []
+2
+1000.00 万 人民币
+350.00 万 人民币
+55.56 万 人民币
+9.00 万 人民币
+its last page
+1414.56
+&lt;class 'float'&gt;
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>31</td>
+            <td>28</td>
+            <td>1</td>
+            <td>2</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color: ['#95b75d', 'grey', '#b64645'],
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:28, name:'通过'},
+                        {value:1, name:'失败'},
+                        {value:2, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>
